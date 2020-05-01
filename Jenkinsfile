@@ -31,7 +31,7 @@ pipeline{
 
 		stage('Create kubernetes cluster') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
+				withAWS(region:'us-east-2', credentials:'AWS') {
 					sh '''
 						curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 						sudo mv /tmp/eksctl /usr/local/bin
@@ -54,7 +54,7 @@ pipeline{
 
 		stage('Create conf file cluster') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
+				withAWS(region:'us-east-2', credentials:'AWS') {
 					sh '''
 						aws eks --region us-east-2 update-kubeconfig --name capstone1
 					'''
@@ -64,7 +64,7 @@ pipeline{
 
 		stage('Set current kubectl context') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
+				withAWS(region:'us-east-2', credentials:'AWS') {
 					sh '''
 						kubectl config use-context arn:aws:eks:us-east-2:107490788748:cluster/Capstone1
 					'''
@@ -74,7 +74,7 @@ pipeline{
 
 		stage('Deploy blue container') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
+				withAWS(region:'us-east-2', credentials:'AWS') {
 					sh '''
 						kubectl apply -f ./blue-controller.json
 					'''
@@ -84,7 +84,7 @@ pipeline{
 
 		stage('Deploy green container') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
+				withAWS(region:'us-east-2', credentials:'AWS') {
 					sh '''
 						kubectl apply -f ./green-controller.json
 					'''
@@ -94,7 +94,7 @@ pipeline{
 
 		stage('Create the service in the cluster, redirect to blue') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
+				withAWS(region:'us-east-2', credentials:'AWS') {
 					sh '''
 						kubectl apply -f ./blue-service.json
 					'''
@@ -110,7 +110,7 @@ pipeline{
 
 		stage('Create the service in the cluster, redirect to green') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
+				withAWS(region:'us-east-2', credentials:'AWS') {
 					sh '''
 						kubectl apply -f ./green-service.json
 					'''
@@ -120,7 +120,7 @@ pipeline{
 
 		stage('Details of Deployment') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
+				withAWS(region:'us-east-2', credentials:'AWS') {
 					sh '''
 						kubectl get pods
 					'''
