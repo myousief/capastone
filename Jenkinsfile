@@ -13,7 +13,7 @@ pipeline{
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'myousief', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
-						docker build -t  myousief/capstone .
+						docker build -t  myousief/capstone1 .
 					'''
 				}
 			}
