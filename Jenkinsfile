@@ -36,7 +36,7 @@ pipeline{
 						curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 						sudo mv /tmp/eksctl /usr/local/bin
 						eksctl version
-						eksctl create cluster --name capstone --version 1.15 \
+						eksctl create cluster --name capstone1 --version 1.15 \
 												--nodegroup-name standard-workers \
 												--node-type t2.small \
 												--nodes 2 \
