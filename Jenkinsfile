@@ -23,7 +23,7 @@ pipeline{
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'myousief', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
 						docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-						docker push myousief/capstone
+						docker push myousief/capstone1
 					'''
 				}
 			}
